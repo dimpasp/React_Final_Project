@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CustomNavbar from MyNavbar.js;
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "react-bootstrap/Navbar";
+import MyNavbar from './MyNavbar';
+
 
 const IndexStructure = () => {
   return (
-      <CustomNavbar />
+      <MyNavbar />
       );
     };
 ReactDOM.render(<IndexStructure />, document.getElementById("root"));
