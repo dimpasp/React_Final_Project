@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "react-bootstrap/Navbar";
 import MyNavbar from './MyNavbar';
-
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import { render } from '@testing-library/react';
 
 const IndexStructure = () => {
   return (
-      <MyNavbar />
-      );
-    };
+    <React.Fragment>
+      <MyNavbar />,
+      <App />
+    </React.Fragment>
+  );
+};
 ReactDOM.render(<IndexStructure />, document.getElementById("root"));
+
