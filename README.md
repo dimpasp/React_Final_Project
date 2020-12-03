@@ -1,2 +1,4 @@
 # React_Final_Project
-# use bootsrap 
+# use package of:
+bootsrap 
+axios
