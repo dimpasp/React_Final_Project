@@ -3,7 +3,10 @@ import ReactDOM from "react-dom";
 import { Form, Button, change, onSubmit } from "react-bootstrap";
 import axios from 'axios';
 
+
 {/* 
+
+   // function gia to validation
 
 validate = () => {
   let isError = false;
@@ -19,16 +22,7 @@ validate = () => {
 
 */}
 
-  {/*
-    genika na dw to axios 
 
-componentDidMount(){
-  axios.get('https://jsonplaceholder.typicode.com/users')
-  .then (x=>{
-    this.setState({TitleName:x.data});
-
-    tha to topothetisw nwta to state
-*/}
 
 export default class MyForm extends React.Component {
   state = {
@@ -44,16 +38,36 @@ export default class MyForm extends React.Component {
     NormalPrice: []
 
   }
-  
+      // event gia tin allagi twn stoixeiwn sti forma genika kai to post sto json 
+  handleSubmit = event => {
+    event.preventDefault();
+    const user = {
+      TitleNameId: this.state.TitleNameId
+    }
+    axios.post('http://localhost:3001/db.json', { user })
+      .then(res => {
+        window.location = "/retrieve" //This line of code will redirect you once the submission is succeed
+      })
+  }
+
+  //allagi value se ena property
+  handleChange = event => {
+    this.setState({ name: event.target.value });
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <Form.Row>
           <h1>Add Course</h1>
+          <label> Title Name:
+            <input type="text" name="TitleNameId" onChange={this.handleChange} />
+          </label>
+          {/** 
           <Form.Group controlId="TitleNameId">
             <Form.Label>Title Name</Form.Label>
             <Form.Control as="TitleName" />
-          </Form.Group>
+          </Form.Group>*/}
           <hr />
           <Form.Group controlId="DurationId">
             <Form.Label>Duration</Form.Label>

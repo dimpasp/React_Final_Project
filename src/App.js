@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-
+// DEN xreizimeuei.tin xrisomopoiw poio polu gia test
 class App extends Component {
     render() {
         return (
@@ -13,14 +13,3 @@ class App extends Component {
 }
 export default App;
 
-
-
-{/*
-<Modal.Dialog>
-<Modal.Body>
-    <h1>Welcome to Cide.Hub Dashboard!</h1>
-    <h3> Manage everything and have fun!</h3>
-  </Modal.Body>
-</Modal.Dialog>
-
-*/}
