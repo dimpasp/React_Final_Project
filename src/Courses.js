@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import MyNavbar from './MyNavbar';
-
+{/*
 //einai to connection me to json file pou xeirizomaste
 const data = require("./db");
 const Table = () => {
@@ -53,6 +53,7 @@ const Table = () => {
         });
         return result;
     }
+    
     return (
         <React.Fragment>
             <p>Courses</p>
@@ -69,4 +70,4 @@ const Table = () => {
     );
 
 };
-export default Table;
+export default Table;*/ }

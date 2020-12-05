@@ -7,12 +7,12 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { render } from '@testing-library/react';
 import Table from './Courses';
 
+
 const IndexStructure = () => {
   return (
     <React.Fragment>
       <MyNavbar />,
-      <App />,
-      <Table />
+      <App />
     </React.Fragment>
   );
 };
