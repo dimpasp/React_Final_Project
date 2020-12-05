@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import "bootstrap/dist/css/bootstrap.min.css";
 import MyNavbar from './MyNavbar';
-import { Route, BrowserRouter as Router } from "react-router-dom";
-import { render } from '@testing-library/react';
-import Table from './Courses';
+import Table from './Stats'
+
+
+
 
 
 const IndexStructure = () => {
   return (
     <React.Fragment>
       <MyNavbar />,
-      <App />
+      <App />,
+      <Table />
     </React.Fragment>
   );
 };

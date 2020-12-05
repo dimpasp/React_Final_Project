@@ -1,0 +1,12 @@
+.form{
+    position: center;
+    border: 0.4px solid black;
+    border-radius: 0.5px;
+    width: 50%;
+    height: 100%;
+    background-color:lightblue;
+    opacity: 1;
+    font-weight: bold;
+    color: #035E7B;
+    transition: 2s;
+}
