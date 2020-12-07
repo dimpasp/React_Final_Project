@@ -1,16 +1,29 @@
-import React, { Component } from 'react';
-import "./App.css";
+import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import MyNavbar from './MyNavbar';
+import Courses from './Courses';
+import Home from './Home';
+import AddNewCourse from './AddNewCourse';
+import Footer from './Fouter';
 
-// DEN xreizimeuei.tin xrisomopoiw poio polu gia test
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <h1>Welcome to Code.Hub Dashboard!</h1>
-                <h3> Manage everything and have fun!</h3>
-            </div>
-        );
-    }
-}
+
+
+
+function App ()  {
+  return (
+    <>
+    <Router>
+      <MyNavbar />
+      <Switch>
+          <Route path='/Home' exact component={Home} />
+          <Route path='/Courses' component={Courses} />
+          <Route path='/AddNewCourse' component={AddNewCourse} />
+        </Switch>   
+        <Footer />
+    </Router>
+    </>
+  );
+};
 export default App;
 

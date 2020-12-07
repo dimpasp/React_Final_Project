@@ -1,0 +1,15 @@
+  .footer-container {
+    color: white;
+    background-color: black;
+    padding-top: 3em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+    
+  .footer-subscription-heading {
+    font-size: 24px;
+    align-items: center;
+    text-align: center; 
+    padding: 5px;
+  }

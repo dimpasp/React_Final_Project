@@ -71,3 +71,5 @@ const Table = () => {
 
 };
 export default Table;*/ }
+const Table = () => {};
+export default Table;
