@@ -13,20 +13,27 @@ export default class MyForm extends React.Component {
 
     this.state = {
       //Εδω δημιουργουμε τα στοιχεια του αντικειμενου που θα χρησιμοποιησουμε
-      TitleName: [],
-      DurationName: [],
-      imageId: [],
-      JohnId: [],
-      YiannisId: [],
-      DescriptionName: [],
-      StartDate: [],
-      EndDate: [],
-      EarlyBird: [],
-      NormalPrice: [],
+      TitleName: '',
+      DurationName: '',
+      imageId: '',
+      JohnId: '',
+      YiannisId: '',
+      DescriptionName: '',
+      StartDate: '',
+      EndDate: '',
+      EarlyBird: '',
+      NormalPrice: '',
 
     };
   }
+// ειναι μια μεθοδος που ενεργοποιειται οταν βαλουμε ενα value μεσω της onChange.
+  //Oυσιαστικα εδω κανουμε state την καινουργια τιμη στο input.
+  handleChange(event) {
+   console.log(event.target.name);
+   
+    this.setState({ [event.target.name] : event.target.value });
 
+  }
   // Aυτη η μεθοδος χρησιμοποιειται για να κανουμε ενημερωση το αντικειμενο(φορμα στην περιπτωση).
   // Ουσιαστικα εδω περνει τις τρεχουσες τιμες της καταστασης και στην συνεχεια ενημερωνει το κομματι απο το app που χηριζομαστε.
   handleSubmit = (event) => {
@@ -53,61 +60,54 @@ export default class MyForm extends React.Component {
       });
   }
 
-  // ειναι μια μεθοδος που ενεργοποιειται οταν βαλουμε ενα value μεσω της onChange.
-  //Oυσιαστικα εδω κανουμε state την καινουργια τιμη στο input.
-  handleChange(event) {
-    event.preventDefault();
-    this.setState({ value: event.target.value });
-  }
-
   render() {
     return (
       <form id="contact-form" onSubmit={this.handleSubmit}>
         <h1>Add Course</h1>
-        <Form.Group controlId="TitleNameId">
+        <Form.Group >
           <Form.Label>Title Name</Form.Label>
-          <Form.Control type="text" placeholder="Title Name" value={this.state.value} onChange={this.handleChange}/>
+          <Form.Control type="text" name="TitleName" placeholder="Title Name" value={this.state.TitleName} onChange={this.handleChange}/>
         </Form.Group>
         <hr />
-        <Form.Group controlId="DurationId">
+        <Form.Group >
           <Form.Label>Duration</Form.Label>
-          <Form.Control type="text" placeholder="Duration" value={this.state.value} onChange={this.handleChange}/>
+          <Form.Control type="text" name="DurationName" placeholder="Duration" value={this.state.DurationName} onChange={this.handleChange}/>
         </Form.Group>
         <Form.Group>
-          <Form.File id="imageId" label="Image for Course" value={this.state.value} onChange={this.handleChange} />
+          <Form.File name="imageId" label="Image for Course" value={this.state.imageId} onChange={this.handleChange} />
         </Form.Group>
         <hr />
         <h1>Instructors</h1>
-        <Form.Group controlId="JohnId">
-          <Form.Check type="checkbox" label="John Tsevdos" value={this.state.value} onChange={this.handleChange} />
+        <Form.Group >
+          <Form.Check type="checkbox" name="JohnId" label="John Tsevdos" value={this.state.JohnId} onChange={this.handleChange} />
         </Form.Group>
-        <Form.Group controlId="YiannisId">
-          <Form.Check type="checkbox" label="Yiannis Nikolakopoulos" value={this.state.value} onChange={this.handleChange} />
+        <Form.Group >
+          <Form.Check type="checkbox" name="YiannisId" label="Yiannis Nikolakopoulos" value={this.state.YiannisId} onChange={this.handleChange} />
         </Form.Group>
         <hr />
-        <Form.Group controlId="DescriptionName">
+        <Form.Group>
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows="4" value={this.state.value} onChange={this.handleChange} />
+          <Form.Control as="textarea" name="DescriptionName" rows="4" value={this.state.DescriptionName} onChange={this.handleChange} />
         </Form.Group>
         <hr />
         <h1>Dates</h1>
-        <Form.Group controlId="StartDate">
+        <Form.Group >
           <Form.Label>Start Date:</Form.Label>
-          <Form.Control type="text" placeholder="Start Date" value={this.state.value} onChange={this.handleChange} />
+          <Form.Control type="text" name="StartDate" placeholder="Start Date" value={this.state.StartDate} onChange={this.handleChange} />
         </Form.Group>
-        <Form.Group controlId="EndDate">
+        <Form.Group >
           <Form.Label>End Date:</Form.Label>
-          <Form.Control type="text" placeholder="End Date" value={this.state.value} onChange={this.handleChange} />
+          <Form.Control type="text" name="EndDate" placeholder="End Date" value={this.state.EndDate} onChange={this.handleChange} />
         </Form.Group>
         <hr />
         <h1>Price</h1>
-        <Form.Group controlId="EarlyBird">
+        <Form.Group>
           <Form.Label>Early Bird:</Form.Label>
-          <Form.Control type="text" placeholder="0" value={this.state.value} onChange={this.handleChange} />
+          <Form.Control type="text" name="EarlyBird" placeholder="0" value={this.state.EarlyBird} onChange={this.handleChange} />
         </Form.Group>
-        <Form.Group controlId="NormalPrice">
+        <Form.Group>
           <Form.Label>Normal price:</Form.Label>
-          <Form.Control type="text" placeholder="0" value={this.state.value} onChange={this.handleChange} />
+          <Form.Control type="text" name="NormalPrice" placeholder="0" value={this.state.NormalPrice} onChange={this.handleChange} />
         </Form.Group>
         <input type="submit" value="Submit" />
       </form>

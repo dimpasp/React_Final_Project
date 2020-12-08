@@ -14,7 +14,7 @@ const CustomNavbar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
-            <Nav.Link href="/Courses">Courses</Nav.Link>
+            <Nav.Link href="/CourseForm">Courses</Nav.Link>
             <Nav.Link href="/AddNewCourse">Add new course</Nav.Link>
           </Nav>
         </Navbar.Collapse>

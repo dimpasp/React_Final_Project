@@ -4,11 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 
 
-const Table = (courses) => {
-    return (
-    <div>  
-      <div className="courses-list">
-        {courses.map(({ id, title, imagePath, price }) => (
+const Table = ({courses}) => (
+      <div >
+        { courses.length && courses.map(({ id, title, imagePath, price }) => (
             <Card type="inner" key={id}>
               <CardTitle>{title}</CardTitle>  
               <CardImg component="img"image={imagePath}/>
@@ -20,7 +18,7 @@ const Table = (courses) => {
             </Card>
           ))}
       </div>
-    </div>
+   
   );
-  };
+
 export default Table;

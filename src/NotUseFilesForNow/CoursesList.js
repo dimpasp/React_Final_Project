@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TableList from './Courses';
+import TableList from '..NotUseFilesForNow/Courses';
 
 const CourseList=()=>{
     const[courses,setcourses]=useState([]);
