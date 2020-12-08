@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { render } from "react-dom";
-import { Form, Button, change, onSubmit } from "react-bootstrap";
+import React from "react";
+import { Form } from "react-bootstrap";
 import "./Form.css";
 import axios from 'axios';
 
@@ -11,7 +9,7 @@ export default class MyForm extends React.Component {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getValidationState = this.getValidationState.bind(this);
+   
 
     this.state = {
       //Εδω δημιουργουμε τα στοιχεια του αντικειμενου που θα χρησιμοποιησουμε
@@ -25,7 +23,6 @@ export default class MyForm extends React.Component {
       EndDate: [],
       EarlyBird: [],
       NormalPrice: [],
-      errors: {}
 
     };
   }
@@ -47,11 +44,6 @@ export default class MyForm extends React.Component {
       NormalPrice: this.state.NormalPrice,
     }
 
-    if (this.getValidationState()) {
-      alert("Form submitted");
-    } else {
-      alert("Form has errors.")
-    }
 
     axios
       .post('http://localhost:3000/courses', { formAsk })
@@ -64,33 +56,9 @@ export default class MyForm extends React.Component {
   // ειναι μια μεθοδος που ενεργοποιειται οταν βαλουμε ενα value μεσω της onChange.
   //Oυσιαστικα εδω κανουμε state την καινουργια τιμη στο input.
   handleChange(event) {
+    event.preventDefault();
     this.setState({ value: event.target.value });
   }
-
-  // Μεθοδος για τον ελεγχο των παραμετρων.
-  getValidationState() {/*
-    let formIsValid = true;
-
-    if (!fields["TitleName"]) {
-      formIsValid = false;
-      errors["TitleName"] = "Cannot be empty";
-    }
-
-    if (typeof fields["TitleName"] !== "undefined") {
-      if (!fields["TitleName"].match(/^[a-zA-Z]+$/)) {
-        formIsValid = false;
-        errors["TitleName"] = "Only letters";
-      }
-    }
-    if (!fields["DurationName"]) {
-      formIsValid = false;
-      errors["DurationName"] = "Cannot be empty";
-    }
-    this.setState({ errors: errors });
-
-    return formIsValid;
-
-  */ };
 
   render() {
     return (
@@ -98,12 +66,12 @@ export default class MyForm extends React.Component {
         <h1>Add Course</h1>
         <Form.Group controlId="TitleNameId">
           <Form.Label>Title Name</Form.Label>
-          <Form.Control type="text" placeholder="Title Name" value={this.state.value} onChange={this.handleChange} validationState={this.getValidationState()} />
+          <Form.Control type="text" placeholder="Title Name" value={this.state.value} onChange={this.handleChange}/>
         </Form.Group>
         <hr />
         <Form.Group controlId="DurationId">
           <Form.Label>Duration</Form.Label>
-          <Form.Control type="text" placeholder="Duration" value={this.state.value} onChange={this.handleChange} validationState={this.getValidationState()} />
+          <Form.Control type="text" placeholder="Duration" value={this.state.value} onChange={this.handleChange}/>
         </Form.Group>
         <Form.Group>
           <Form.File id="imageId" label="Image for Course" value={this.state.value} onChange={this.handleChange} />
