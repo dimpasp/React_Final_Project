@@ -62,7 +62,7 @@ export default class MyForm extends React.Component {
 
   render() {
     return (
-      <form id="contact-form" onSubmit={this.handleSubmit}>
+      <form id="contact-form" >
         <h1>Add Course</h1>
         <Form.Group >
           <Form.Label>Title Name</Form.Label>
@@ -109,7 +109,7 @@ export default class MyForm extends React.Component {
           <Form.Label>Normal price:</Form.Label>
           <Form.Control type="text" name="NormalPrice" placeholder="0" value={this.state.NormalPrice} onChange={this.handleChange} />
         </Form.Group>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" onSubmit={this.handleSubmit} />
       </form>
     );
   }

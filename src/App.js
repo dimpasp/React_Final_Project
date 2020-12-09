@@ -10,6 +10,7 @@ import Footer from './Fouter';
 
 
 
+
 function App ()  {
   return (
     <>
@@ -18,7 +19,7 @@ function App ()  {
        <Switch>
           <Route path='/Home' exact component={Home} />
           <Route path='/CourseForm' component={CourseForm} />
-          <Route path='/AddNewCourse' component={AddNewCourse} />
+          <Route path='/AddNewCourse' component={AddNewCourse} />   
         </Switch>   
       <Footer />
     </Router>

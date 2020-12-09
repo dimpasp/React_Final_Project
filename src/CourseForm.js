@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Card, CardTitle, CardText, Row, Col ,CardLink} from 'reactstrap';
+import { Card, CardTitle, CardText,CardImg,CardLink, CardBody} from 'reactstrap';
+import './CourseForm.css'
 
 
 class CardsTable extends Component {
@@ -22,33 +23,32 @@ class CardsTable extends Component {
         this.setState({ errorMsg: 'Error retreiving data' })
       })
   }
-
-  //Δημιουργουμε εναν πινακα για τα αντικειμενα.
+  
   render() {
     const { posts } = this.state
 
     return (
-        <div>
-            <h3 id='title'>Stats about company</h3>
-            <Row>
-                <Col sm="6">
-                    <Card body>
-                        {
-                            posts.length ?
-                                posts.map(post => <td key={post.id}>
-                                    <CardTitle tag="h5">{post.title}</CardTitle>
-                                    <CardText>{post.price.normal}</CardText>
-                                    <CardText>{post.duration}</CardText>
-                                    <CardText>Starting Date: {post.dates.start_date}- Ending Date:{post.dates.end_date}</CardText>
-                                    <CardLink href="#">View</CardLink>
-                                </td>
-                                ) : null
-                        }
-
-                    </Card>
-                </Col>
-            </Row>
+      <div >
+        <h1 id="title">COURSES</h1>
+        <div className="grid">
+        {
+          posts.length ?
+            posts.map(post => <td key={post.id}>
+              <Card  className="box" >
+                <CardTitle class="card-title">{post.title}</CardTitle>
+                <CardImg top width="100%" src={post.imagePath}  key={post.id} alt="Card image cap" />
+                <CardBody>
+                <CardText>Price: {post.price.normal}€ | Bookable:{post.open} √</CardText>
+                  <CardText>Duration: {post.duration}</CardText>
+                  <CardText>Dates: {post.dates.start_date} - {post.dates.end_date}</CardText>
+                  <CardLink variant="primary" href="#">View</CardLink>
+                </CardBody>
+              </Card>
+            </td>
+            ) : null
+        }
         </div>
+      </div>
     )
   }
 
