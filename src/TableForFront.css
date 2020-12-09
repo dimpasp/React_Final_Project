@@ -1,0 +1,22 @@
+#titleId {
+    margin-top: 50px;
+    text-align: center;
+    font-family: arial, sans-serif;
+    margin-bottom: 20px;
+  }
+  .courseIdFive{
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 5px solid #ddd;
+    width: 100%;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+    
+  #courseIdFive td, #courseIdFive th {
+    border: 5px solid blue;  
+    background-color: lightblue;
+    padding: 8px;
+    width: 20px;
+  }

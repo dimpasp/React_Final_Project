@@ -6,6 +6,7 @@ import CourseForm from './CourseForm';
 import Home from './Home';
 import AddNewCourse from './AddNewCourse';
 import Footer from './Fouter';
+import Instructors from './Instructors';
 
 
 
@@ -20,6 +21,7 @@ function App ()  {
           <Route path='/Home' exact component={Home} />
           <Route path='/CourseForm' component={CourseForm} />
           <Route path='/AddNewCourse' component={AddNewCourse} />   
+          <Route path='/Instructors' component={Instructors} />
         </Switch>   
       <Footer />
     </Router>

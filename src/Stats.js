@@ -10,7 +10,7 @@ class MoviesTable extends Component {
       posts: []
     }
   }
-  //Αυτη ειναι μια lifecycle μεθοδος και εκτειλε την πρωτη φορα του get request
+  //Αυτη ειναι μια lifecycle μεθοδος και εκτελειται την πρωτη φορα του get request
   componentDidMount() {
     axios.get('http://localhost:3000/stats')
       .then(response => {

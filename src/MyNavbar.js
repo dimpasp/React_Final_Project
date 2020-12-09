@@ -16,6 +16,7 @@ const CustomNavbar = () => {
           <Nav>
             <Nav.Link href="/CourseForm">Courses</Nav.Link>
             <Nav.Link href="/AddNewCourse">Add new course</Nav.Link>
+            <Nav.Link href="/Instructors">Who we are</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
