@@ -7,6 +7,7 @@ import Home from './Home';
 import AddNewCourse from './AddNewCourse';
 import Footer from './Fouter';
 import Instructors from './Instructors';
+import CourseDetails from './CourseDetails';
 
 
 
@@ -20,6 +21,7 @@ function App ()  {
        <Switch>
           <Route path='/Home' exact component={Home} />
           <Route path='/CourseForm' component={CourseForm} />
+          <Route path='/CourseForm/:id' component={CourseDetails} />
           <Route path='/AddNewCourse' component={AddNewCourse} />   
           <Route path='/Instructors' component={Instructors} />
         </Switch>   

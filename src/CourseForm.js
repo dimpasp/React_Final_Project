@@ -23,6 +23,19 @@ class CardsTable extends Component {
         this.setState({ errorMsg: 'Error retreiving data' })
       })
   }
+
+
+  deleteRow(id, e){
+    axios.delete(`http://localhost:3000/courses/${id}`)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+  
+        const posts = this.state.posts.filter(item => item.id !== id);
+        this.setState({ posts });
+      })
+  
+  }
   
   render() {
     const { posts } = this.state
@@ -38,10 +51,11 @@ class CardsTable extends Component {
                 <CardTitle class="card-title">{post.title}</CardTitle>
                 <CardImg top width="100%" src={post.imagePath}  key={post.id} alt="Card image cap" />
                 <CardBody>
-                <CardText>Price: {post.price.normal}€ | Bookable:{post.open} √</CardText>
+                  <CardText>Price: {post.price.normal}€ | Bookable:{post.open ? '√' : null}</CardText>
                   <CardText>Duration: {post.duration}</CardText>
                   <CardText>Dates: {post.dates.start_date} - {post.dates.end_date}</CardText>
-                  <CardLink variant="primary" href="#">View</CardLink>
+                  <CardLink variant="primary" href={"/CourseDetails/"+post.id}>View</CardLink>
+                  <button className="btn btn-danger" onClick={(e) => this.deleteRow(post.id, e)}>Delete</button>
                 </CardBody>
               </Card>
             </td>

@@ -41,20 +41,29 @@ class CourseTableForm extends Component {
     return (
       <div>
         <h3 id='titleId'>Last five Courses</h3>
-        <Table id='courseIdFive'>
-          {
-            posts.length ?
-              posts.map(post => <tr key={post.id}>
-                <td>{post.id}</td>
-                <td>{post.title}</td>
-                <td>√</td>
-                <td>{post.price.normal}</td>
-                <td>{post.dates.start_date} to {post.dates.end_date}</td>
-                <td><a class="btn btn-primary" href="#" role="button">View details</a></td>
-              </tr>
-              ) : null
-          }
-    
+        <Table variant="dark">
+          <thead>
+            <tr>
+              <td>#</td>
+              <td>Title</td>
+              <td>Bookable</td>
+              <td>Price</td>
+              <td>Date</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map(post => <tr key={post.id}>
+              <td>{post.id}</td>
+              <td>{post.title}</td>
+              <td>{post.open ? '√' : null}</td>
+              <td>{post.price.normal}</td>
+              <td>{post.dates.start_date} to {post.dates.end_date}</td>
+              <td><a class="btn btn-primary" href="#" role="button">View details</a></td>
+            </tr>
+            )}
+
+          </tbody>
         </Table>
         <a class="btn btn-success" href="/CourseForm" role="button">View all</a>
       </div>
@@ -62,3 +71,4 @@ class CourseTableForm extends Component {
   }
 }
 export default CourseTableForm;
+
