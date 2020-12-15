@@ -16,14 +16,19 @@ export default class MyForm extends React.Component {
       TitleName: '',
       DurationName: '',
       imageId: '',
-      JohnId: '',
-      YiannisId: '',
+       instructors:[
+         {JohnId : ''},
+         {YiannisId : ''}
+        ],
       DescriptionName: '',
-      StartDate: '',
-      EndDate: '',
-      EarlyBird: '',
-      NormalPrice: '',
-
+      dates:[
+        {StartDate: ''},
+        {EndDate: ''}
+      ],
+      price:[
+        {EarlyBird: ''},
+        {NormalPrice: '' }
+        ]
     };
   }
 // ειναι μια μεθοδος που ενεργοποιειται οταν βαλουμε ενα value μεσω της onChange.

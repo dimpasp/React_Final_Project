@@ -22,7 +22,8 @@
   }
   
   #students tr:nth-child(even){
-      background-color: limegreen;
+      width: 50px;
+      background-color: solid wheat;
   
     }
   

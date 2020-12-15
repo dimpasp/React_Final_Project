@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Card, CardTitle, CardText, CardBody} from 'reactstrap';
 import './CourseForm.css'
+import Image from 'react-bootstrap/Image'
 
 
 class InstructorsForm extends Component {
@@ -29,6 +30,16 @@ class InstructorsForm extends Component {
 
     return (
       <div >
+        <div>
+        <Image src="code-background-1.png"  style={{resizeMode: "cover", height: 400,  width: 2000 }} fluid />
+        </div>
+        <div>
+          <h1 style={{textAlign:'center',marginTop:30 }}>Vision</h1>
+          <h5 style={{marginLeft:150 ,marginTop:30 }}>Code.Hub is your ideal HR partner whether you are a multinational company, a startup company or an ICT professional.</h5>
+          <h5  style={{marginLeft:150 ,marginBottom:30 }}>Our vision is to meet every professional in ICT sector, either by Code.Career, 
+             Code.Learn or Code.Event services and connect them to create a powerful Code.Community.</h5>
+        </div>
+        <div>
         <h1 id="title">Instructors</h1>
         <div className="grid">
         {
@@ -49,11 +60,10 @@ class InstructorsForm extends Component {
             ) : null
         }
         </div>
+        </div>
       </div>
     )
   }
 
 }
 export default InstructorsForm;
-
-//thank you for your preference
