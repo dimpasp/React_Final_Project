@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios'
 import { Card, CardTitle, CardText,CardImg,CardLink, CardBody} from 'reactstrap';
 import './CourseForm.css'
@@ -48,14 +49,14 @@ class CardsTable extends Component {
           posts.length ?
             posts.map(post => <td key={post.id}>
               <Card  className="box" >
-                <CardTitle class="card-title">{post.title}</CardTitle>
+                <CardTitle className="card-title">{post.title}</CardTitle>
                 <CardImg top width="100%" src={post.imagePath}  key={post.id} alt="Card image cap" />
                 <CardBody>
                   <CardText>Price: {post.price.normal}€ | Bookable:{post.open ? '√' : null}</CardText>
                   <CardText>Duration: {post.duration}</CardText>
                   <CardText>Dates: {post.dates.start_date} - {post.dates.end_date}</CardText>
-                  <CardLink variant="primary" href={"/CourseDetails/"+post.id}>View</CardLink>
-                  <button className="btn btn-danger" onClick={(e) => this.deleteRow(post.id, e)}>Delete</button>
+                  <Link to={`CourseDetails/${post.id}`}><button className="btn btn-primary btn-sm">View</button></Link>
+                  <button className="btn btn-danger" style={{float: 'right'}} onClick={(e) => this.deleteRow(post.id, e)}>Delete</button>
                 </CardBody>
               </Card>
             </td>

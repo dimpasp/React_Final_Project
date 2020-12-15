@@ -59,13 +59,13 @@ class CourseTableForm extends Component {
               <td>{post.open ? '√' : null}</td>
               <td>{post.price.normal}</td>
               <td>{post.dates.start_date} to {post.dates.end_date}</td>
-              <td><a class="btn btn-primary" href="#" role="button">View details</a></td>
+              <td><a className="btn btn-primary" href="#" role="button">View details</a></td>
             </tr>
             )}
 
           </tbody>
         </Table>
-        <a class="btn btn-success" href="/CourseForm" role="button">View all</a>
+        <a className="btn btn-success" href="/CourseForm" role="button">View all</a>
       </div>
     )
   }

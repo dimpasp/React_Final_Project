@@ -8,7 +8,7 @@ import AddNewCourse from './AddNewCourse';
 import Footer from './Fouter';
 import Instructors from './Instructors';
 import CourseDetails from './CourseDetails';
-
+import EditCourse from './EditCourse';
 
 
 
@@ -19,11 +19,12 @@ function App ()  {
     <Router>
       <MyNavbar />
        <Switch>
-          <Route path='/Home' exact component={Home} />
-          <Route path='/CourseForm' component={CourseForm} />
-          <Route path='/CourseForm/:id' component={CourseDetails} />
-          <Route path='/AddNewCourse' component={AddNewCourse} />   
-          <Route path='/Instructors' component={Instructors} />
+          <Route exact path='/Home' component={Home} />
+          <Route exact path='/CourseForm' component={CourseForm} />
+          <Route exact path='/CourseDetails/:id' component={CourseDetails} />
+          <Route exact path='/AddNewCourse' component={AddNewCourse} />   
+          <Route exact path='/EditCourse/:id' component={EditCourse} />
+          <Route exact path='/Instructors' component={Instructors} />
         </Switch>   
       <Footer />
     </Router>
