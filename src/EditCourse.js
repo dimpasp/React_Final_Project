@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { alignPropType } from 'react-bootstrap/esm/DropdownMenu';
-
+import { Form } from "react-bootstrap";
+import "./Form.css";
 
 
 class EditCourse extends Component {
@@ -9,16 +9,18 @@ class EditCourse extends Component {
         super(props)
         this.state = {
           id:'',
-          TitleName: '',
-          DurationName: '',
-          open:'',
-          JohnId: '',
-          YiannisId: '',
-          DescriptionName: '',
-          StartDate: '',
-          EndDate: '',
-          EarlyBird: '',
-          NormalPrice: ''
+          title: '',
+          duration: '',
+          imagePath: '',
+          description: '',
+          dates:{
+            start_date: '',
+            end_date: ''
+             },
+          price:{
+              normal: '' , 
+              early_bird: ''
+          }
         }
         this.handleInputChange = this.handleInputChange.bind(this);
       }
@@ -30,8 +32,9 @@ class EditCourse extends Component {
         .then(response => {
           this.setState({
             id: response.data.id,
-            TitleName: response.data.TitleName,
-            DurationName: response.data.DurationName  
+            title: response.data.title,
+            duration: response.data.duration  ,
+            description:response.data.description
           }, () => {
             console.log(this.state);
           });
@@ -54,11 +57,12 @@ class EditCourse extends Component {
   }
   onSubmit(e){
     const newCourse = {
-      TitleName: this.refs.TitleName.value,
-      DurationName: this.DurationName.value,
+      title: this.name.title.value,
+      duration: this.name.duration.value,
+      description: this.name.description.value
       
     }
-    this.editMeetup(newCourse);
+    this.updateCourse(newCourse);
     e.preventDefault();
   }
 
@@ -77,49 +81,42 @@ class EditCourse extends Component {
      <div >
         <br />
        <h1 style={{textAlign:'center',marginTop:30 }}>Edit Course</h1>
-       <form onSubmit={this.onSubmit.bind(this)} style={{textAlign:'center',marginTop:10 }}>
-          <div className="input-field">
-            <label htmlFor="TitleName">Title : </label>
-            <input type="text" name="TitleName" ref="TitleName" value={this.state.TitleName} onChange={this.handleInputChange} /> 
-          </div>
-          <div className="input-field"> 
-            <label htmlFor="DurationName">Duration : </label>
-            <input type="text" name="DurationName" ref="DurationName" value={this.state.DurationName} onChange={this.handleInputChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="DescriptionName">Description : </label>
-            <input as="textarea" rows={3} name="DescriptionName" ref="DescriptionName" value={this.state.DescriptionName} onChange={this.handleInputChange} /> 
-          </div>
-          <div className="input-field"> 
-            <label htmlFor="StartDate">Start Date: </label>
-            <input type="text" name="StartDate" ref="StartDate" value={this.state.StartDate} onChange={this.handleInputChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="EndDate">End Date : </label>
-            <input  type="text" name="EndDate" ref="EndDate" value={this.state.EndDate} onChange={this.handleInputChange} /> 
-          </div>
-          <div className="input-field"> 
-            <label htmlFor="EarlyBird">Early Bird : </label>
-            <input type="text" name="EarlyBird" ref="EarlyBird" value={this.state.EarlyBird} onChange={this.handleInputChange} />
-          </div>
-          <div className="input-field"> 
-            <label htmlFor="NormalPrice">Normal Price : </label>
-            <input type="text" name="NormalPrice" ref="NormalPrice" value={this.state.NormalPrice} onChange={this.handleInputChange} />
-          </div>
-
-          <div className="input-field">
-            <label htmlFor="JohnId">Is John instructor ? </label>
-            <input type="checkbox" name="JohnId" ref="JohnId" value={this.state.JohnId} onChange={this.handleInputChange} /> 
-          </div>
-          <div className="input-field"> 
-            <label htmlFor="YiannisId">Is Yiannis instructor ? </label>
-            <input type="checkbox" name="YiannisId" ref="YiannisId" value={this.state.YiannisId} onChange={this.handleInputChange} />
-          </div>
-          <div className="input-field"> 
-            <label htmlFor="open">Bookable : </label>
-            <input type="checkbox" name="open" ref="open" value={this.state.open} onChange={this.handleInputChange} />
-          </div>
-          <input  type="submit" value="Save" className="btn"  />
+       <form id="contact-form" onSubmit={this.onSubmit.bind(this)} style={{textAlign:'center',marginTop:10 }}>
+          <Form.Group >
+            <Form.Label>Title Name  </Form.Label>
+            <Form.Control type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group>
+            <Form.File name="imagePath" label="Image for Course" value={this.state.imagePath} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group >
+            <Form.Label>Price Early :  </Form.Label>
+            <Form.Control type="text" name="EarlyBird" value={this.state.EarlyBird} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group >
+            <Form.Label>Normal Price : </Form.Label>
+            <Form.Control type="text" name="NormalPrice" value={this.state.NormalPrice} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group >
+            <Form.Label>Date start :  </Form.Label>
+            <Form.Control type="text" name="start_date" value={this.state.start_date} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group >
+            <Form.Label>Date end :  </Form.Label>
+            <Form.Control type="text" name="end_date" value={this.state.end_date} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group >
+            <Form.Check type="checkbox" name="open" label="Bookable ?" value={this.state.open} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group >
+            <Form.Label>Duration : </Form.Label>
+            <Form.Control type="text" name="duration" value={this.state.duration} onChange={this.handleInputChange} />
+          </Form.Group>
+          <Form.Group >
+            <Form.Label>Description : </Form.Label>
+            <Form.Control as="textarea" rows={3} name="description" value={this.state.description} onChange={this.handleInputChange} />
+          </Form.Group>
+          <input type="submit" value="Save" className="btn" />
         </form>
       </div>
     )

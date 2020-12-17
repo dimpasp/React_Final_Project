@@ -3,7 +3,8 @@ import { Form } from "react-bootstrap";
 import "./Form.css";
 import axios from 'axios';
 
-export default class MyForm extends React.Component {
+
+class MyForm extends React.Component {
 
   constructor() {
     super();
@@ -11,24 +12,24 @@ export default class MyForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
    
 
-    this.state = {
+    this.state  = {
       //Εδω δημιουργουμε τα στοιχεια του αντικειμενου που θα χρησιμοποιησουμε
-      TitleName: '',
-      DurationName: '',
-      imageId: '',
-       instructors:[
-         {JohnId : ''},
-         {YiannisId : ''}
-        ],
-      DescriptionName: '',
-      dates:[
-        {StartDate: ''},
-        {EndDate: ''}
-      ],
-      price:[
-        {EarlyBird: ''},
-        {NormalPrice: '' }
-        ]
+      id:'',
+      title: '',
+      open: '',
+      duration: '',
+      imagePath: '',
+      description: '',
+      dates:{
+        start_date: '',
+        end_date: ''
+         },
+      price:{
+          normal: '' , 
+          early_bird: ''
+      },
+      loading: true,
+      error: false,
     };
   }
 // ειναι μια μεθοδος που ενεργοποιειται οταν βαλουμε ενα value μεσω της onChange.
@@ -42,80 +43,104 @@ export default class MyForm extends React.Component {
   // Aυτη η μεθοδος χρησιμοποιειται για να κανουμε ενημερωση το αντικειμενο(φορμα στην περιπτωση).
   // Ουσιαστικα εδω περνει τις τρεχουσες τιμες της καταστασης και στην συνεχεια ενημερωνει το κομματι απο το app που χηριζομαστε.
   handleSubmit = (event) => {
-    event.preventDefault();
-    const formAsk = {
-      TitleName: this.state.TitleName,
-      DurationName: this.state.DurationName,
-      imageId: this.state.imageId,
-      JohnId: this.state.JohnId,
-      YiannisId: this.state.YiannisId,
-      DescriptionName: this.state.DescriptionName,
-      StartDate: this.state.StartDate,
-      EndDate: this.state.EndDate,
-      EarlyBird: this.state.EarlyBird,
-      NormalPrice: this.state.NormalPrice,
+    event.preventDefault()
+    {/*
+      AYTH TH ΦΟΡΜΑ ΧΡΗΣΙΜΟΠΟΙΟΥΣΑ!!
+
+       const courses = {
+      title: this.state.title,
+      open:this.state.open,
+      duration: this.state.duration,
+      imagePath: this.state.imagePath,
+      description: this.state.description,
+      dates:{
+        start_date: this.state.start_date,
+        end_date: this.state.end_date
+         },
+      price:{
+        normal: this.state.normal , 
+        early_bird:this.state.early_bird 
+             }
     }
-
-
+    
+    */}
     axios
-      .post('http://localhost:3000/courses', { formAsk })
+      .post('http://localhost:3000/courses',this.state)
       .then(res => {
         console.log(res);
         console.log(res.data);
-      });
+      })
+      .catch(err => { // log request error and prevent access to undefined state
+        this.setState({ loading: false, error: true });
+        console.error(err); 
+      })
   }
 
   render() {
+
+    if (this.state.error ) { // if request failed or data is empty don't try to access it either
+    return(
+      <div>
+        <p> An error occured </p>
+      </div>
+    )
+  }
     return (
-      <form id="contact-form" >
-        <h1>Add Course</h1>
+      <div>
+        <h1 style={{textAlign:'center',marginTop:10 }}>Add Course</h1>
+      <form id="contact-form" onSubmit={this.handleSubmit}>
         <Form.Group >
           <Form.Label>Title Name</Form.Label>
-          <Form.Control type="text" name="TitleName" placeholder="Title Name" value={this.state.TitleName} onChange={this.handleChange}/>
+          <Form.Control type="text" name="title" placeholder="Title Name" value={this.state.title} onChange={this.handleChange}/>
         </Form.Group>
         <hr />
         <Form.Group >
           <Form.Label>Duration</Form.Label>
-          <Form.Control type="text" name="DurationName" placeholder="Duration" value={this.state.DurationName} onChange={this.handleChange}/>
+          <Form.Control type="text" name="duration" placeholder="Duration" value={this.state.duration} onChange={this.handleChange}/>
         </Form.Group>
         <Form.Group>
-          <Form.File name="imageId" label="Image for Course" value={this.state.imageId} onChange={this.handleChange} />
+          <Form.File name="imagePath" label="Image for Course" value={this.state.imagePath} onChange={this.handleChange} />
         </Form.Group>
         <hr />
         <h1>Instructors</h1>
         <Form.Group >
-          <Form.Check type="checkbox" name="JohnId" label="John Tsevdos" value={this.state.JohnId} onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group >
-          <Form.Check type="checkbox" name="YiannisId" label="Yiannis Nikolakopoulos" value={this.state.YiannisId} onChange={this.handleChange} />
-        </Form.Group>
+           <Form.Check type="checkbox" name="01" label="John ?" />
+         </Form.Group>
+         <Form.Group >
+           <Form.Check type="checkbox" name="02" label="Yiannis ?" />
+         </Form.Group>
         <hr />
         <Form.Group>
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" name="DescriptionName" rows="4" value={this.state.DescriptionName} onChange={this.handleChange} />
+          <Form.Control as="textarea" name="description" rows="4" value={this.state.description} onChange={this.handleChange} />
         </Form.Group>
         <hr />
         <h1>Dates</h1>
         <Form.Group >
           <Form.Label>Start Date:</Form.Label>
-          <Form.Control type="text" name="StartDate" placeholder="Start Date" value={this.state.StartDate} onChange={this.handleChange} />
+          <Form.Control type="text" name="start_date" placeholder="Start Date" value={this.state.start_date} onChange={this.handleChange} />
         </Form.Group>
         <Form.Group >
           <Form.Label>End Date:</Form.Label>
-          <Form.Control type="text" name="EndDate" placeholder="End Date" value={this.state.EndDate} onChange={this.handleChange} />
+          <Form.Control type="text" name="end_date" placeholder="End Date" value={this.state.end_date} onChange={this.handleChange} />
         </Form.Group>
         <hr />
         <h1>Price</h1>
         <Form.Group>
           <Form.Label>Early Bird:</Form.Label>
-          <Form.Control type="text" name="EarlyBird" placeholder="0" value={this.state.EarlyBird} onChange={this.handleChange} />
+          <Form.Control type="text" name="early_bird" placeholder="0" value={this.state.early_bird} onChange={this.handleChange} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Normal price:</Form.Label>
-          <Form.Control type="text" name="NormalPrice" placeholder="0" value={this.state.NormalPrice} onChange={this.handleChange} />
+          <Form.Control type="value" name="normal" placeholder="0" value={this.state.normal} onChange={this.handleChange} />
         </Form.Group>
-        <input type="submit" value="Submit" onSubmit={this.handleSubmit} />
+        <Form.Group >
+           <Form.Check type="checkbox" name="open" label="Bookable ?" />
+         </Form.Group>
+        <input type="submit" value="Submit"  />
       </form>
+      </div>
     );
   }
 }
+export default  MyForm ;

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Form } from "react-bootstrap";
-import "./Form.css";
 import Image from 'react-bootstrap/Image';
-import { Link } from "react-router-dom";
+import {Link } from "react-router-dom";
+import { Button } from 'reactstrap';
 
 
 
@@ -11,7 +10,7 @@ class CourseDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          details: ''
+          details: null
         }
       }
       //Αυτη ειναι μια lifecycle μεθοδος και εκτειλε την πρωτη φορα του get request
@@ -36,47 +35,59 @@ class CourseDetail extends Component {
           }).catch(err => console.log(err));
       }
       
-    
+
         render() {
-
+           console.log(this.state)
           return (
-            <Form id="contact-form">
-               <Form.Group >
-               <Form.Label>Title Name  </Form.Label>
-               <Form.Control type="text" name="TitleName"  value={this.state.details.title}/>
-              </Form.Group>
-
-              <Image src={this.state.details.imagePath }  style={{resizeMode: "cover", height: 50,  width: 50 }} fluid />
-              <Form.Group >
-               <Form.Label>Price  </Form.Label>
-               <Form.Control type="text" name="price"  value={this.state.details.price }/>
-              </Form.Group>
-              <Form.Group >
-               <Form.Label>dates  </Form.Label>
-               <Form.Control type="text" name="dates"  value={this.state.details.dates }/>
-              </Form.Group>
-              <Form.Group >
-               <Form.Label>Bookable  </Form.Label>
-               <Form.Control type="text" name="Bookable"  value={this.state.details.open ? '√' : null}/>
-              </Form.Group>
-              <Form.Group >
-               <Form.Label>Duration </Form.Label>
-               <Form.Control type="text" name="duration"  value={this.state.details.duration}/>
-              </Form.Group> 
-              <Form.Group >
-               <Form.Label>description  </Form.Label>
-               <Form.Control  as="textarea" rows={3} name="description"  value={this.state.details.description}/>
-              </Form.Group>       
-
-              <Link className="btn" to={`/EditCourse/${this.state.details.id}`}> Edit</Link>
-
-              <button onClick={this.onDelete.bind(this)} className="btn red right">Delete</button>
-
-
-              </Form>         
+            this.state.details ?
+             <div>
+            <form>
+               <div class="modal-header">
+                  <h5 class="modal-title"  style={{textAlign:'center',marginTop:30 }}>{this.state.details.title}</h5>
+               </div>
+              <div>
+              <Image src={this.state.details.imagePath }  style={{resizeMode: "cover", height: 500,  width:1000 }} fluid />
+              </div>
+              <div  class="row">
+                <div class="col">
+                    <div className="modal-body">
+                       <p>price : {this.state.details.price.normal}</p>  
+                    </div>
+                </div>
+                <div class="col">
+                  <div className="modal-body">
+                    <p>Duration : {this.state.details.duration}</p>
+                   </div>
+                </div>
+              </div>
+              <div  class="row">
+                <div class="col">
+                    <div className="modal-body">
+                    <p>Bookable : {this.state.details.open ? '√' : null}</p>
+                    </div>
+                </div>
+                <div class="col">
+                  <div className="modal-body">
+                  <p>Dates : {this.state.details.dates.start_date} to {this.state.details.dates.end_date} </p>  
+                   </div>
+                </div>
+              </div>
+               <div class="modal-body">
+                <p>{this.state.details.description}</p>
+               </div>
+              <div  class="row" >     
+              <Link to={`/EditCourse/${this.state.details.id}`}>
+              <Button color="success">Edit</Button></Link>
+              <Button color="danger" onClick={this.onDelete.bind(this)}>Delete</Button>
+              </div>
+              <h3>Instructors</h3>
+              <hr />         
+            </form>
+              </div> : "loading"                 
           )
         }
-      }
+   }
+      
 export default CourseDetail;
 
 

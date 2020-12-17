@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Table } from 'react-bootstrap';
-import './TableForFront.css'
+import './TableForFront.css';
+import { Link } from "react-router-dom";
 
 //Function για να καλουμε μονο 5 Courses.
 //Oυσιαστικα εδω θα επηρεασουμε το length του πινακα
@@ -59,10 +60,9 @@ class CourseTableForm extends Component {
               <td>{post.open ? '√' : null}</td>
               <td>{post.price.normal}</td>
               <td>{post.dates.start_date} to {post.dates.end_date}</td>
-              <td><a className="btn btn-primary" href="#" role="button">View details</a></td>
+              <td><Link to={`CourseDetails/${post.id}`}><button className="btn btn-primary btn-sm">View</button></Link></td>
             </tr>
             )}
-
           </tbody>
         </Table>
         <a className="btn btn-success" href="/CourseForm" role="button">View all</a>
