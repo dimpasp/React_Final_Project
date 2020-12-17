@@ -1,43 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Table } from 'react-bootstrap';
 import './TableForFront.css';
 import { Link } from "react-router-dom";
 
-//Function για να καλουμε μονο 5 Courses.
-//Oυσιαστικα εδω θα επηρεασουμε το length του πινακα
-const range = len => {
-    const arr = []
-    for (let i = 0; i < 5; i++) {
-      arr.push(i)
-    }
-    return arr
-  }
+function CourseTableForm() {
+  const [posts, setposts] = useState([]);
+ 
 
-
-class CourseTableForm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      posts: []
-    }
-  }
-  //Αυτη ειναι μια lifecycle μεθοδος και εκτελειται την πρωτη φορα του get request
-  componentDidMount() {
-    axios.get('http://localhost:3000/courses')
-      .then(response => {
-        console.log(response)
-        this.setState({ posts: response.data })
-      })
-      .catch(error => {
-        console.log(error)
-        this.setState({ errorMsg: 'Error retreiving data' })
-      })
-  }
-  
-  
-  render() {
-    const { posts } = this.state
+  useEffect(() => {
+      axios.get("http://localhost:3000/courses")
+          .then((response) => {
+              console.log(response.data)
+              let range=[]
+              for(let i=0;i<5;i++){
+                range.push(response.data[i])
+              }
+              setposts(range)
+          })
+  }, [])
 
     return (
       <div>
@@ -69,6 +50,6 @@ class CourseTableForm extends Component {
       </div>
     )
   }
-}
+
 export default CourseTableForm;
 

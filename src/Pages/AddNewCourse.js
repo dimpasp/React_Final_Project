@@ -13,12 +13,12 @@ class MyForm extends React.Component {
    
 
     this.state  = {
-      //Εδω δημιουργουμε τα στοιχεια του αντικειμενου που θα χρησιμοποιησουμε
       id:'',
       title: '',
-      open: '',
+      open: false,
       duration: '',
       imagePath: '',
+      instructors:[],
       description: '',
       dates:{
         start_date: '',
@@ -32,16 +32,37 @@ class MyForm extends React.Component {
       error: false,
     };
   }
+
+
 // ειναι μια μεθοδος που ενεργοποιειται οταν βαλουμε ενα value μεσω της onChange.
   //Oυσιαστικα εδω κανουμε state την καινουργια τιμη στο input.
   handleChange(event) {
    console.log(event.target.name);
-   
-    this.setState({ [event.target.name] : event.target.value });
-
+   const {name,value} = event.target;
+   if(event.target.name==="normal"||event.target.name==="early_bird"){
+    this.setState((price) => {
+      return {
+        ...price,
+        [name]: value
+      };
+  });
+   }
+   if(event.target.name==="start_date"||event.target.name==="end_date"){
+    this.setState((dates) => {
+      return {
+        ...dates,
+        [name]: value
+      };
+  });
+   }
+   else
+    this.setState({ [name] : value });
   }
+
+
+
   // Aυτη η μεθοδος χρησιμοποιειται για να κανουμε ενημερωση το αντικειμενο(φορμα στην περιπτωση).
-  // Ουσιαστικα εδω περνει τις τρεχουσες τιμες της καταστασης και στην συνεχεια ενημερωνει το κομματι απο το app που χηριζομαστε.
+  // Ουσιαστικα μεσω του axios στελνουμε τα δεδομενα.
   handleSubmit = (event) => {
     event.preventDefault()
     {/*
@@ -70,21 +91,24 @@ class MyForm extends React.Component {
         console.log(res);
         console.log(res.data);
       })
-      .catch(err => { // log request error and prevent access to undefined state
+      // log request error and prevent access to undefined state
+      .catch(err => { 
         this.setState({ loading: false, error: true });
         console.error(err); 
       })
   }
 
-  render() {
-
-    if (this.state.error ) { // if request failed or data is empty don't try to access it either
+  render() { 
+    
+    // if request failed or data is empty don't try to access it either
+    if (this.state.error ) {
     return(
       <div>
         <p> An error occured </p>
       </div>
-    )
-  }
+         )
+      }
+
     return (
       <div>
         <h1 style={{textAlign:'center',marginTop:10 }}>Add Course</h1>

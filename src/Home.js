@@ -1,8 +1,8 @@
 import React from 'react';
-import FrontPage from './FrontPage';
-import './FrontPage.css';
-import Stats from './Stats';
-import TableForFront from './TableForFront';
+import FrontPage from './FrontPage/FrontPage';
+import './FrontPage/FrontPage.css';
+import Stats from './FrontPage/Stats';
+import TableForFront from './FrontPage/TableForFront';
 
 function Home() {
   return (

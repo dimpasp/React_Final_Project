@@ -114,6 +114,24 @@
         "normal": 100,
         "early_bird": 50
       }
+    },
+    {
+      "id": "06",
+      "title": "python",
+      "open": true,
+      "duration": "2 weeks",
+      "imagePath": "",
+      "description": "full course",
+      "dates": {
+        "start_date": "2/12/2020",
+        "end_date": "18/12/2020"
+      },
+      "price": {
+        "normal": 500,
+        "early_bird": 240
+      },
+      "loading": true,
+      "error": false
     }
   ],
   "instructors": [
