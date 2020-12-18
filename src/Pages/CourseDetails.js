@@ -43,7 +43,7 @@ class CourseDetail extends Component {
              <div>
             <form>
                <div class="modal-header">
-                  <h5 class="modal-title"  style={{textAlign:'center',marginTop:30 }}>{this.state.details.title}</h5>
+                  <h5 class="modal-title"  style={{textAlign:'center',marginTop:30 }}>{this.state.details.title}({this.state.details.id})</h5>
                </div>
               <div>
               <Image src={this.state.details.imagePath }  style={{resizeMode: "cover", height: 500,  width:1000 }} fluid />

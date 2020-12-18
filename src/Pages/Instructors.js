@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Card, CardTitle, CardText, CardBody} from 'reactstrap';
+import {Carousel,Image} from 'react-bootstrap'
 import './CourseForm.css'
-import Image from 'react-bootstrap/Image'
+
 
 
 class InstructorsForm extends Component {
@@ -31,7 +32,17 @@ class InstructorsForm extends Component {
     return (
       <div >
         <div>
-        <Image src="code-background-1.png"  style={{resizeMode: "cover", height: 400,  width: 2000 }} fluid />
+        <Carousel>
+        <Carousel.Item interval={1000}>
+          <Image src="code-background-1.png"  style={{resizeMode: "cover", height: 400,  width: 2000 }} fluid />
+        </Carousel.Item>
+        <Carousel.Item interval={500}>
+          <Image src="learn.png"  style={{resizeMode: "cover", height: 400,  width: 2000 }} fluid />
+        </Carousel.Item>
+        <Carousel.Item interval={1000}>
+          <Image src="python.png"  style={{resizeMode: "cover", height: 400,  width: 2000 }} fluid />
+        </Carousel.Item>
+        </Carousel>
         </div>
         <div>
           <h1 style={{textAlign:'center',marginTop:30 }}>Vision</h1>
@@ -46,7 +57,7 @@ class InstructorsForm extends Component {
           posts.length ?
             posts.map(post => <td key={post.id}>
               <Card  className="box" >
-              <CardTitle class="card-title">{post.name.first} {post.name.last}</CardTitle>
+              <CardTitle className="card-title">{post.name.first} {post.name.last}</CardTitle>
                 <CardBody>
                   <CardText>Gender: {post.gender}</CardText>
                   <CardText>Email: {post.email}</CardText>

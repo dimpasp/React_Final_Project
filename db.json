@@ -104,7 +104,7 @@
       "title": "c++",
       "duration": "2 weeks",
       "open": true,
-      "imagePath": "C:\\fakepath\\img3.jpg",
+      "imagePath": "/C++.png",
       "description": "advance",
       "dates": {
         "start_date": "2/12/2020",
@@ -120,7 +120,7 @@
       "title": "python",
       "open": true,
       "duration": "2 weeks",
-      "imagePath": "",
+      "imagePath": "/python.png",
       "description": "full course",
       "dates": {
         "start_date": "2/12/2020",
