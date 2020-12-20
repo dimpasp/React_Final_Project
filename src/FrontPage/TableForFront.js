@@ -13,6 +13,7 @@ function CourseTableForm() {
           .then((response) => {
               console.log(response.data)
               let range=[]
+              //μεθοδος για να μας επιστρεφει τισ 5 πρωτες εγγραφες
               for(let i=0;i<5;i++){
                 range.push(response.data[i])
               }

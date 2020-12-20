@@ -54,9 +54,6 @@ class MyForm extends React.Component {
     }
   }
 
-
-
-  // ειναι μια μεθοδος που ενεργοποιειται οταν βαλουμε ενα value μεσω της onChange.
   //Oυσιαστικα εδω κανουμε state την καινουργια τιμη στο input.
   handleChange(event) {
     console.log(event.target.name);
@@ -77,7 +74,7 @@ class MyForm extends React.Component {
         break;
     }
 
-    //Setstate για καθε κλασση
+    //Setstate για τιμες
     if (event.target.name === "normal" || event.target.name === "early_bird") {
       this.setState((price) => {
         return {
@@ -87,6 +84,7 @@ class MyForm extends React.Component {
       });
     }
 
+    //Setstate για μερες
     else if (event.target.name === "start_date" || event.target.name === "end_date") {
       this.setState((dates) => {
         return {
@@ -96,6 +94,7 @@ class MyForm extends React.Component {
       });
     }
 
+    //Setstate για bookable
     else if (event.target.name === "open") {
       const { open } = event.target
       this.setState({
@@ -103,11 +102,28 @@ class MyForm extends React.Component {
       })
     }
 
+     //Setstate για ολα τα υπολοιπα + ελεγχος των error
     else
       this.setState({ formErrors, [name]: value });
   }
 
-
+ //Function για τους instructor.Εφοσον γινει το check κανουμε push στο array το id
+  FuncInstructors = (event) => {
+    const { name, submit } = event.target;
+    if (submit) {
+      if (name === "JohnTsevdos") { this.state.instructors.push("01");
+      }
+      if (name === "YiannisNikolakopoulos") { this.state.instructors.push("02");
+      }
+    }
+    //εαν δεν γινει submit παλι πρεπει να επιστρεψουμε τιμη (!id) λογω του length του array
+    else {
+      if (name === "JohnTsevdos") { this.state.instructors = this.state.instructors.filter(function (event) { return event !== "01" })
+      }
+      if (name === "YiannisNikolakopoulos") { this.state.instructors = this.state.instructors.filter(function (event) { return event !== "02" })
+      }
+    }
+  }
 
   // Aυτη η μεθοδος χρησιμοποιειται για να κανουμε ενημερωση το αντικειμενο(φορμα στην περιπτωση).
   handleSubmit = (event) => {
@@ -140,9 +156,10 @@ class MyForm extends React.Component {
 
 
   render() {
+    //δηλωνουμε τα error για να τα χρησιμοποιησουμε στην φορμα
     const { formErrors } = this.state;
 
-    // if request failed or data is empty don't try to access it either
+    // να εμφανισει μνμ εαν αποτυχει το request
     if (this.state.error) {
       return (
         <div>
@@ -168,13 +185,17 @@ class MyForm extends React.Component {
             <Form.Label>Image</Form.Label>
             <Form.Control type="text" name="imagePath" placeholder="Path for image" value={this.state.imagePath} onChange={this.handleChange} />
           </Form.Group>
+          <Form.Group >
+            <Form.Label check="true">{' '}Bookable</Form.Label>
+            <Form.Check type="checkbox" name="open" onChange={this.handleChange} />
+          </Form.Group>
           <hr />
           <h1>Instructors</h1>
           <Form.Group >
-            <Form.Check type="checkbox" name="01" label="John ?" />
+            <Form.Check type="checkbox" label="John Tsevdos" name="JohnTsevdos" onChange={this.FuncInstructors}  />
           </Form.Group>
           <Form.Group >
-            <Form.Check type="checkbox" name="02" label="Yiannis ?" />
+            <Form.Check type="checkbox" label="Yiannis Nikolakopoulos" name="YiannisNikolakopoulos" onChange={this.FuncInstructors}  />
           </Form.Group>
           <hr />
           <Form.Group>
@@ -201,10 +222,7 @@ class MyForm extends React.Component {
             <Form.Label>Normal price:</Form.Label>
             <Form.Control type="value" name="normal" placeholder="0" value={this.state.normal} onChange={this.handleChange} />
           </Form.Group>
-          <Form.Group >
-            <Form.Label check="true">{' '}Bookable</Form.Label>
-            <Form.Check type="checkbox" name="open" onChange={this.handleChange} />
-          </Form.Group>
+          <hr />
           <input type="submit" value="Submit" />
         </form>
       </div>

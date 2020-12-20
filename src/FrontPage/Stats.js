@@ -23,7 +23,7 @@ class MoviesTable extends Component {
       })
   }
 
-  //Δημιουργουμε εναν πινακα για τα αντικειμενα.
+  //Κανουμε render το ανικειμενο που πηραμε απο το request.
   render() {
     const { posts, errorMsg } = this.state
 

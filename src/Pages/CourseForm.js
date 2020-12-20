@@ -25,7 +25,7 @@ class CardsTable extends Component {
       })
   }
 
-
+ //Μεθοδος για την διαγραφη του object. Αυτο γινεται χρησιμοποιοντας το id του.
   deleteRow(id, e){
     axios.delete(`http://localhost:3000/courses/${id}`)
       .then(res => {
@@ -46,6 +46,7 @@ class CardsTable extends Component {
         <h1 id="title">COURSES</h1>
         <div className="grid">
         {
+          //Αρχικα ελεγχος οτι φορτωθηκε το obj.
           posts.length ?
             posts.map(post => <td key={post.id}>
               <Card  className="box" >

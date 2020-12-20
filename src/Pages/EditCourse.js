@@ -25,15 +25,20 @@ class EditCourse extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
       }
      
-
+//αρχικα ελεγχουμε αν το id που τσεκαρουμε υπαρχει.
+//Εφοσον υπαρχει φερνουμε ολα τα data του object του.
       componentDidMount(id) {
         let CourseId = this.props.match.params.id;
         axios.get(`http://localhost:3000/courses/${CourseId}`)
         .then(response => {
           this.setState({
             id: response.data.id,
+            normal:response.data.price.normal,
+            early_bird:response.data.price.early_bird,
+            start_date:response.data.dates.start_date,
+            end_date:response.data.dates.end_date,
             title: response.data.title,
-            duration: response.data.duration  ,
+            duration: response.data.duration,
             description:response.data.description
           }, () => {
             console.log(this.state);
@@ -44,9 +49,9 @@ class EditCourse extends Component {
           })
       }
 
+//στελνουμε τα δεδομενα του update μεσω του Put request
 
-
-    updateCourse (newCourse) {
+      EditCourse (newCourse) {
     axios.request({
       method:'put',
       url:`http://localhost3000/courses/${this.state.id}`,
@@ -55,27 +60,31 @@ class EditCourse extends Component {
       this.props.history.push('/');
     }).catch(err => console.log(err));
   }
+
+//περναμε τις αλλαγες που θελουμε στο καινουργιο/ανανεωμενο object(συνολικα)
   onSubmit(e){
     const newCourse = {
       title: this.name.title.value,
       duration: this.name.duration.value,
-      description: this.name.description.value
-      
+      description: this.name.description.value,
+      normal:this.name.normal.value,
+      early_bird:this.name.early_bird.value,
+      start_date:this.name.start_date.value,
+      end_date:this.name.end_date.value
     }
     this.updateCourse(newCourse);
     e.preventDefault();
   }
 
+  //περναει η καθε αλλαγη ξεχωριστα
   handleInputChange(e){
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
-
+    const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   }
 
+  //εμφανιζουμε το ηδη υπαρχον αντικειμενο και δινουμε την δυνατοτητα αλλαγης
   render(){
     return (
      <div >
@@ -91,11 +100,11 @@ class EditCourse extends Component {
           </Form.Group>
           <Form.Group >
             <Form.Label>Price Early :  </Form.Label>
-            <Form.Control type="text" name="EarlyBird" value={this.state.EarlyBird} onChange={this.handleInputChange} />
+            <Form.Control type="text" name="early_bird" value={this.state.early_bird} onChange={this.handleInputChange} />
           </Form.Group>
           <Form.Group >
             <Form.Label>Normal Price : </Form.Label>
-            <Form.Control type="text" name="NormalPrice" value={this.state.NormalPrice} onChange={this.handleInputChange} />
+            <Form.Control type="text" name="normal" value={this.state.normal} onChange={this.handleInputChange} />
           </Form.Group>
           <Form.Group >
             <Form.Label>Date start :  </Form.Label>
@@ -104,9 +113,6 @@ class EditCourse extends Component {
           <Form.Group >
             <Form.Label>Date end :  </Form.Label>
             <Form.Control type="text" name="end_date" value={this.state.end_date} onChange={this.handleInputChange} />
-          </Form.Group>
-          <Form.Group >
-            <Form.Check type="checkbox" name="open" label="Bookable ?" value={this.state.open} onChange={this.handleInputChange} />
           </Form.Group>
           <Form.Group >
             <Form.Label>Duration : </Form.Label>
