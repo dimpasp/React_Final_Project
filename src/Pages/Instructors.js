@@ -60,11 +60,10 @@ class InstructorsForm extends Component {
               <CardTitle className="card-title">{post.name.first} {post.name.last}</CardTitle>
                 <CardBody>
                   <CardText>Gender: {post.gender}</CardText>
-                  <CardText>Email: {post.email}</CardText>
-                  <CardText>Linkedin profil: {post.linkedin}</CardText>
                   <CardText>Date of birth: {post.dob}</CardText>
                   <CardText>Bio: {post.bio}</CardText>
-                  <CardText>Hobbies list: {post.hobbies}</CardText>
+                  <CardText>Hobbies list: {post.hobbies}</CardText> 
+                  <CardText><a href="#">{post.email}</a>{" | "}<a href="#">{post.linkedin}</a></CardText>
                 </CardBody>
               </Card>
             </td>

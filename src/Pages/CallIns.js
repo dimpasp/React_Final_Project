@@ -31,7 +31,7 @@ const Instructors = ({ instructorId }) => {
           instructors.length ?
           //κανουμε post μονο τα data απο το id που θελουμε
           instructors.map(post => 
-            instructorId.indexOf(post.id) ?
+            instructorId.indexOf(post.id) >-1 ?
                (
                 <div>
                     <div className="modal-body">

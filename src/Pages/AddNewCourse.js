@@ -38,14 +38,8 @@ class MyForm extends React.Component {
       imagePath: '',
       instructors: [],
       description: null,
-      dates: {
-        start_date: '',
-        end_date: ''
-      },
-      price: {
-        normal: '',
-        early_bird: ''
-      },
+      dates: [],
+      price: [],
       loading: true,
       formErrors: {
         title: "",
@@ -63,39 +57,19 @@ class MyForm extends React.Component {
     //Γινεται ελεγχος του εκασθοτε property
     switch (name) {
       case "title":
-        formErrors.firstName =
-          value.length < 3 ? "minimum 3 characaters required" : "";
+        formErrors.title =
+          value.length < 5 ? "minimum 5 characaters required" : "";
         break;
       case "description":
-        formErrors.lastName =
-          value.length < 3 ? "minimum 3 characaters required" : "";
+        formErrors.description =
+          value.length < 5 ? "minimum 5 characaters required" : "";
         break;
       default:
         break;
     }
 
-    //Setstate για τιμες
-    if (event.target.name === "normal" || event.target.name === "early_bird") {
-      this.setState((price) => {
-        return {
-          ...price,
-          [name]: value
-        };
-      });
-    }
-
-    //Setstate για μερες
-    else if (event.target.name === "start_date" || event.target.name === "end_date") {
-      this.setState((dates) => {
-        return {
-          ...dates,
-          [name]: value
-        };
-      });
-    }
-
     //Setstate για bookable
-    else if (event.target.name === "open") {
+     if (event.target.name === "open") {
       const { open } = event.target
       this.setState({
         open: !open
@@ -107,22 +81,34 @@ class MyForm extends React.Component {
       this.setState({ formErrors, [name]: value });
   }
 
+
+  //Setstate για μερες
+  handleDate= (event) => {
+    const { name, value } = event.target;
+    this.setState({ dates: {...this.state.dates, [name]: value }
+       });
+  }
+
+
+  //Setstate για τιμες
+  handlePrice = (event) => {
+    const { name, value } = event.target;
+    this.setState({ price: {...this.state.price, [name]: value } 
+      });
+  }
+
  //Function για τους instructor.Εφοσον γινει το check κανουμε push στο array το id
-  FuncInstructors = (event) => {
-    const { name, submit } = event.target;
-    if (submit) {
-      if (name === "JohnTsevdos") { this.state.instructors.push("01");
+  handleInstructors = (event) => {
+    const { name, value } = event.target;
+
+      if (name === "JohnTsevdos") 
+      { 
+        this.state.instructors.push("01");
       }
-      if (name === "YiannisNikolakopoulos") { this.state.instructors.push("02");
-      }
-    }
-    //εαν δεν γινει submit παλι πρεπει να επιστρεψουμε τιμη (!id) λογω του length του array
-    else {
-      if (name === "JohnTsevdos") { this.state.instructors = this.state.instructors.filter(function (event) { return event !== "01" })
-      }
-      if (name === "YiannisNikolakopoulos") { this.state.instructors = this.state.instructors.filter(function (event) { return event !== "02" })
-      }
-    }
+      if (name === "YiannisNikolakopoulos") 
+      { 
+        this.state.instructors.push("02");
+      } 
   }
 
   // Aυτη η μεθοδος χρησιμοποιειται για να κανουμε ενημερωση το αντικειμενο(φορμα στην περιπτωση).
@@ -192,10 +178,12 @@ class MyForm extends React.Component {
           <hr />
           <h1>Instructors</h1>
           <Form.Group >
-            <Form.Check type="checkbox" label="John Tsevdos" name="JohnTsevdos" onChange={this.FuncInstructors}  />
+          <Form.Label check="true">{' '}John Tsevdos</Form.Label>
+            <Form.Check type="checkbox" name="JohnTsevdos" onChange={this.handleInstructors}  />
           </Form.Group>
           <Form.Group >
-            <Form.Check type="checkbox" label="Yiannis Nikolakopoulos" name="YiannisNikolakopoulos" onChange={this.FuncInstructors}  />
+          <Form.Label check="true">{' '}Yiannis Nikolakopoulos</Form.Label>
+            <Form.Check type="checkbox" name="YiannisNikolakopoulos" onChange={this.handleInstructors}  />
           </Form.Group>
           <hr />
           <Form.Group>
@@ -206,21 +194,21 @@ class MyForm extends React.Component {
           <h1>Dates</h1>
           <Form.Group >
             <Form.Label>Start Date:</Form.Label>
-            <Form.Control type="text" name="start_date" placeholder="Start Date" value={this.state.start_date} onChange={this.handleChange} />
+            <Form.Control type="text" name="start_date" placeholder="Start Date" value={this.state.start_date} onChange={this.handleDate} />
           </Form.Group>
           <Form.Group >
             <Form.Label>End Date:</Form.Label>
-            <Form.Control type="text" name="end_date" placeholder="End Date" value={this.state.end_date} onChange={this.handleChange} />
+            <Form.Control type="text" name="end_date" placeholder="End Date" value={this.state.dates.end_date} onChange={this.handleDate} />
           </Form.Group>
           <hr />
           <h1>Price</h1>
           <Form.Group>
             <Form.Label>Early Bird:</Form.Label>
-            <Form.Control type="text" name="early_bird" placeholder="0" value={this.state.early_bird} onChange={this.handleChange} />
+            <Form.Control type="text" name="early_bird" placeholder="0" value={this.state.price.early_bird} onChange={this.handlePrice} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Normal price:</Form.Label>
-            <Form.Control type="value" name="normal" placeholder="0" value={this.state.normal} onChange={this.handleChange} />
+            <Form.Control type="value" name="normal" placeholder="0" value={this.state.price.normal} onChange={this.handlePrice} />
           </Form.Group>
           <hr />
           <input type="submit" value="Submit" />

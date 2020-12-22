@@ -4,6 +4,7 @@ import Image from 'react-bootstrap/Image';
 import {Link } from "react-router-dom";
 import Instructors from "./CallIns";
 import { Button } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 
 //Tο χρησιμοποιω για να αφαιρεσω τα HTML tags απο το description
 const regex = /(<([^>]+)>)/ig;
@@ -31,14 +32,20 @@ class CourseDetail extends Component {
       }
 
       //Μεθοδος για την διαγραφη του object. Αυτο γινεται χρησιμοποιοντας το id του.
-      onDelete(){
+      onDelete(id, e){
+        e.preventDefault();
         let CourseId = this.state.details.id;
         axios.delete(`http://localhost:3000/courses/${CourseId}`)
           .then(response => {
-            this.props.history.push('/');
+            console.log(response);
+            const details = this.state.details.filter(item => item.id !== CourseId);
+            this.setState({ details });        
           }).catch(err => console.log(err));
+          //επιστροφη στην προηγουμενη σελιδα μετα την διαγραφη!!
+          this.props.history.push('/CourseForm'); 
       }
-      
+
+    
         render() {
            console.log(this.state)
           return (
@@ -46,45 +53,45 @@ class CourseDetail extends Component {
             this.state.details ?
              <div>
             <form>
-               <div class="modal-header">
-                  <h2 class="modal-title"  style={{textAlign:'center',marginTop:30 }}>{this.state.details.title}({this.state.details.id})</h2>
+               <div className="modal-header">
+                  <h2 className="modal-title"  style={{textAlign:'center',marginTop:30 }}>{this.state.details.title}({this.state.details.id})</h2>
                </div>
               <div>
               <Image src={this.state.details.imagePath }  style={{resizeMode: "cover", height: 500,  width:1300 }} fluid />
               </div>
-              <div  class="row">
-                <div class="col">
+              <div  className="row">
+                <div className="col">
                     <div className="modal-body">
-                       <h4>Price : {this.state.details.price.normal}</h4>  
+                       <h4>Price : {this.state.details.price.normal}€</h4>  
                     </div>
                 </div>
-                <div class="col">
+                <div className="col">
                   <div className="modal-body">
                     <h4>Duration : {this.state.details.duration}</h4>
                    </div>
                 </div>
               </div>
-              <div  class="row">
-                <div class="col">
+              <div  className="row">
+                <div className="col">
                     <div className="modal-body">
                     <h4>Bookable : {this.state.details.open ? '√' : null}</h4>
                     </div>
                 </div>
-                <div class="col">
+                <div className="col">
                   <div className="modal-body">
                   <h4>Dates : {this.state.details.dates.start_date} to {this.state.details.dates.end_date} </h4>  
                    </div>
                 </div>
               </div>
-               <div class="modal-body">
+               <div className="modal-body">
                 <h4>{this.state.details.description.replace(regex, '')}</h4>
                </div>
-              <div  class="row" >     
+              <div  className="row" >     
               <Link to={`/EditCourse/${this.state.details.id}`}>
               <Button color="success">Edit</Button></Link>
-              <Button color="danger" onClick={this.onDelete.bind(this)}>Delete</Button>
+              <Button color="danger" onClick={(e) => { if(window.confirm('Delete the item?')) this.onDelete(this.state.details.id, e) } }>Delete</Button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                  <h2>Instructors</h2>
                </div>
               <hr />  
@@ -95,7 +102,7 @@ class CourseDetail extends Component {
         }
    }
       
-export default CourseDetail;
+export default withRouter(CourseDetail);
 
 
  

@@ -102,23 +102,25 @@
     {
       "id": "05",
       "title": "c++",
+      "imagePath": "/C++.png",
+      "price": {
+        "normal": 100,
+        "early_bird": 50
+      },
       "duration": "2 weeks",
       "open": true,
-      "imagePath": "/C++.png",
+      "instructors": [
+        "01"
+      ],
       "description": "advance",
       "dates": {
         "start_date": "2/12/2020",
         "end_date": "18/12/2020"
-      },
-      "price": {
-        "normal": 100,
-        "early_bird": 50
       }
     },
     {
       "id": "06",
       "title": "python",
-      "open": true,
       "duration": "2 weeks",
       "imagePath": "/python.png",
       "description": "full course",
@@ -127,11 +129,54 @@
         "end_date": "18/12/2020"
       },
       "price": {
+        "normal": "500",
+        "early_bird": "300"
+      },
+      "instructors": [
+        "01"
+      ]
+    },
+    {
+      "id": "09",
+      "title": "r programming lang",
+      "duration": "2 weeks and 4 days",
+      "imagePath": "/learn.png",
+      "description": "full course of big data",
+      "instructors": [
+        "02"
+      ],
+      "dates": {
+        "start_date": "2/12/2020",
+        "end_date": "18/12/2020"
+      },
+      "price": {
         "normal": 500,
         "early_bird": 240
+      }
+    },
+    {
+      "id": "6KGmVxw",
+      "title": "Certified Scrum Master®",
+      "open": true,
+      "duration": "2 weeks and 4 days",
+      "imagePath": "/python.png",
+      "instructors": [
+        "01"
+      ],
+      "description": "lessons for testing",
+      "dates": {
+        "start_date": "2019-09-27",
+        "end_date": "2019-09-28"
+      },
+      "price": {
+        "early_bird": "300",
+        "normal": "500"
       },
       "loading": true,
-      "error": false
+      "formErrors": {
+        "title": "",
+        "description": ""
+      }
     }
   ],
   "instructors": [

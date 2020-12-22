@@ -13,14 +13,9 @@ class EditCourse extends Component {
           duration: '',
           imagePath: '',
           description: '',
-          dates:{
-            start_date: '',
-            end_date: ''
-             },
-          price:{
-              normal: '' , 
-              early_bird: ''
-          }
+          instructors: [],
+          dates:[],
+          price:[]
         }
         this.handleInputChange = this.handleInputChange.bind(this);
       }
@@ -33,10 +28,11 @@ class EditCourse extends Component {
         .then(response => {
           this.setState({
             id: response.data.id,
-            normal:response.data.price.normal,
+            imagePath:response.data.imagePath,
             early_bird:response.data.price.early_bird,
-            start_date:response.data.dates.start_date,
-            end_date:response.data.dates.end_date,
+            normal:response.data.price.normal,
+            dates:response.data.dates,
+            instructors:response.data.instructors,
             title: response.data.title,
             duration: response.data.duration,
             description:response.data.description
@@ -48,32 +44,32 @@ class EditCourse extends Component {
             this.setState({ errorMsg: 'Error retreiving data' })
           })
       }
+      FuncInstructors = (event) => {
+        const { name, submit } = event.target;
+        if (submit) {
+          if (name === "JohnTsevdos") { this.state.instructors.push("01");
+          }
+          if (name === "YiannisNikolakopoulos") { this.state.instructors.push("02");
+          }
+        }
+        //εαν δεν γινει submit παλι πρεπει να επιστρεψουμε τιμη (!id) λογω του length του array
+        else {
+          if (name === "JohnTsevdos") { this.state.instructors = this.state.instructors.filter(function (event) { return event !== "01" })
+          }
+          if (name === "YiannisNikolakopoulos") { this.state.instructors = this.state.instructors.filter(function (event) { return event !== "02" })
+          }
+        }
+      }
 
 //στελνουμε τα δεδομενα του update μεσω του Put request
 
-      EditCourse (newCourse) {
-    axios.request({
-      method:'put',
-      url:`http://localhost3000/courses/${this.state.id}`,
-      data: newCourse
-    }).then(response => {
-      this.props.history.push('/');
-    }).catch(err => console.log(err));
-  }
-
-//περναμε τις αλλαγες που θελουμε στο καινουργιο/ανανεωμενο object(συνολικα)
-  onSubmit(e){
-    const newCourse = {
-      title: this.name.title.value,
-      duration: this.name.duration.value,
-      description: this.name.description.value,
-      normal:this.name.normal.value,
-      early_bird:this.name.early_bird.value,
-      start_date:this.name.start_date.value,
-      end_date:this.name.end_date.value
-    }
-    this.updateCourse(newCourse);
+  onSubmit(id, e){
     e.preventDefault();
+    axios.put(`http://localhost:3000/courses/${this.state.id}`, this.state)
+      .then(response => {
+        console.log(response);       
+      }).catch(err => console.log(err));
+      this.props.history.push('/CourseForm'); 
   }
 
   //περναει η καθε αλλαγη ξεχωριστα
@@ -90,13 +86,14 @@ class EditCourse extends Component {
      <div >
         <br />
        <h1 style={{textAlign:'center',marginTop:30 }}>Edit Course</h1>
-       <form id="contact-form" onSubmit={this.onSubmit.bind(this)} style={{textAlign:'center',marginTop:10 }}>
+       <form id="contact-form" onSubmit={(e)=>this.onSubmit(this.state.id,e)}>
           <Form.Group >
             <Form.Label>Title Name  </Form.Label>
             <Form.Control type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
           </Form.Group>
-          <Form.Group>
-            <Form.File name="imagePath" label="Image for Course" value={this.state.imagePath} onChange={this.handleInputChange} />
+          <Form.Group >
+            <Form.Label>Image</Form.Label>
+            <Form.Control type="text" name="imagePath" placeholder="Path for image" value={this.state.imagePath} onChange={this.handleInputChange} />
           </Form.Group>
           <Form.Group >
             <Form.Label>Price Early :  </Form.Label>
@@ -108,15 +105,22 @@ class EditCourse extends Component {
           </Form.Group>
           <Form.Group >
             <Form.Label>Date start :  </Form.Label>
-            <Form.Control type="text" name="start_date" value={this.state.start_date} onChange={this.handleInputChange} />
+            <Form.Control type="text" name="start_date" value={this.state.dates.start_date} onChange={this.handleInputChange} />
           </Form.Group>
           <Form.Group >
             <Form.Label>Date end :  </Form.Label>
-            <Form.Control type="text" name="end_date" value={this.state.end_date} onChange={this.handleInputChange} />
+            <Form.Control type="text" name="end_date" value={this.state.dates.end_date} onChange={this.handleInputChange} />
           </Form.Group>
           <Form.Group >
             <Form.Label>Duration : </Form.Label>
             <Form.Control type="text" name="duration" value={this.state.duration} onChange={this.handleInputChange} />
+          </Form.Group>
+          <h1>Instructors</h1>
+          <Form.Group >
+            <Form.Check type="checkbox" label="John Tsevdos" name="JohnTsevdos" onChange={this.FuncInstructors}  />
+          </Form.Group>
+          <Form.Group >
+            <Form.Check type="checkbox" label="Yiannis Nikolakopoulos" name="YiannisNikolakopoulos" onChange={this.FuncInstructors}  />
           </Form.Group>
           <Form.Group >
             <Form.Label>Description : </Form.Label>
